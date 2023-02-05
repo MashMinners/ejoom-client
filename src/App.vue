@@ -1,43 +1,10 @@
 <template>
   <div>
-    <header id="app-header">
-      <MyToolbar>
-        <template #start>
-          <MyButton label="New" icon="pi pi-plus" class="mr-2"></MyButton>
-          <MyButton label="Upload" icon="pi pi-upload" class="p-button-success"></MyButton>
-          <i class="pi pi-bars p-toolbar-separator mr-2"></i>
-        </template>
-        <template #end>
-          <span class="p-input-icon-left" style="width:50%;">
-            <i class="pi pi-search"></i>
-            <MyInputText type="text" placeholder="Search" style="width:500px;"></MyInputText>
-          </span>
-        </template>
-      </MyToolbar>
-    </header>
-    <div id="app-content">
-      <div id="side-bar">
-        <MySidebar v-model:visible="visibleLeft" position="left">
-          Content
-        </MySidebar>
-      </div>
-      <div id="workplace">
-        <div class="card">
-          <MyDataTable :value="records" class="p-datatable-sm" responsiveLayout="scroll">
-            <template #header>
-              Small Table
-            </template>
-            <MyColumn field="id" header="Code"></MyColumn>
-            <MyColumn field="title" header="Name"></MyColumn>
-          </MyDataTable>
-        </div>
-      </div>
-    </div>
-    <footer id="app-footer"></footer>
+    <my-input-text placeholder="text"></my-input-text>
+    <my-button>4243</my-button>
   </div>
 </template>
 <script>
-import {ref} from "vue";
   export default {
     data() {
       return {
