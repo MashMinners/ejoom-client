@@ -1,24 +1,34 @@
 <template>
-  <div>
-    <my-input-text placeholder="text"></my-input-text>
-    <my-button>4243</my-button>
+  <div id="wrapper">
+    <div id="app-header">
+      <header-toolbar></header-toolbar>
+    </div>
+    <div id="app-content">
+      <prime-fieldset>
+        <template #legend>
+          {{ EJournalText }}
+        </template>
+        <records-table>123</records-table>
+      </prime-fieldset>
+    </div>
+    <div id="app-footer"></div>
   </div>
 </template>
 <script>
+  import HeaderToolbar from "@/components/HeaderToolbar.vue";
+  import RecordsTable from "@/components/RecordsTable.vue";
+
   export default {
+    components: {RecordsTable, HeaderToolbar},
     data() {
       return {
+        EJournalType: 'incoming-emails',
+        EJournalText: 'Входящие Email',
         search: null,
         records: [
           {id: '1', title: 'Title #1'},
           {id: '2', title: 'Title #2'},
           {id: '3', title: 'Title #3'}
-        ],
-        visibleLeft: false,
-        selectedType: null,
-        mailTypes: [
-          {id: '1', title: 'Входящие'},
-          {id: '2', title: 'Исходящие'}
         ]
       }
     },
@@ -27,4 +37,15 @@
     }
   }
 </script>
-<style></style>
+<style>
+#app-header{
+
+}
+#app-content{
+  padding: 20px;
+  border: 1px solid #dee2e6;
+}
+#app-footer{
+  background-color:blue;
+}
+</style>
