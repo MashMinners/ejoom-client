@@ -22,14 +22,7 @@
     components: {RecordsTable, HeaderToolbar},
     data() {
       return {
-        EJournalType: 'incoming-emails',
         EJournalText: 'Входящие Email',
-        search: null,
-        records: [
-          {id: '1', title: 'Title #1'},
-          {id: '2', title: 'Title #2'},
-          {id: '3', title: 'Title #3'}
-        ]
       }
     },
     methods: {
