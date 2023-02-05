@@ -60,22 +60,4 @@ import {ref} from "vue";
     }
   }
 </script>
-<style>
-body {
-  margin: 0;
-}
-#app {
-  /*color: green;*/
-}
-#app-content {
-  /*background-color: yellow;*/
-  height: calc(100vh - 50px);
-}
-#app-header {
-  width: 100%;
-  min-height: 50px;
-}
-table, th, td {
-  border: solid 1px;
-}
-</style>
+<style></style>
