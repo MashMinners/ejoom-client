@@ -9,4 +9,7 @@ app.use(PrimeVue, PrimeVueModules.options[0]);
 PrimeVueModules.modules.forEach(component => {
     app.component('Prime'+component.name, component)
 })
+PrimeVueModules.directives.forEach(directive => {
+    app.directive(directive.name, directive.subject)
+})
 app.mount('#app')

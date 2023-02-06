@@ -8,10 +8,13 @@
         <template #legend>
           {{ EJournalText }}
         </template>
-        <records-table>123</records-table>
+        <records-table></records-table>
       </prime-fieldset>
     </div>
     <div id="app-footer"></div>
+    <div id="app-modals">
+
+    </div>
   </div>
 </template>
 <script>
