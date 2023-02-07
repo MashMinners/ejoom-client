@@ -12,4 +12,7 @@ PrimeVueModules.modules.forEach(component => {
 PrimeVueModules.directives.forEach(directive => {
     app.directive(directive.name, directive.subject)
 })
+PrimeVueModules.services.forEach(service => {
+    app.use(service.name, service.subject)
+})
 app.mount('#app')

@@ -61,9 +61,7 @@ export default {
       },
       record: null,
       records: [
-        //{id: '1', mail_number: 1, title: 'Первое письмо', employee: 'Воробьева Е.В.', counterparty: 'МИАЦ', date: '12.01.2023'},
-        //{id: '2', mail_number: 2, title: 'Письмо о чем то', employee: 'Воробьева Е.В.', counterparty: 'МИАЦ', date: '12.01.2024'},
-        //{id: '3', mail_number: 3, title: 'Отчет', employee: 'Маркова Л.А.', counterparty: 'МЗПК Сосиськина Т.А.', date: '15.01.2024'},
+
       ]
     }
   },
