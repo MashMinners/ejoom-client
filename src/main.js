@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import PrimeVue from 'primevue/config';
 import PrimeVueModules from "@/configs/prime.vue.modules";
+import store from "@/store";
 
 
 const app = createApp(App)
@@ -15,4 +16,5 @@ PrimeVueModules.directives.forEach(directive => {
 PrimeVueModules.services.forEach(service => {
     app.use(service.name, service.subject)
 })
-app.mount('#app')
+app.use(store);
+app.mount('#app');
