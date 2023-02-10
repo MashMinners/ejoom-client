@@ -2,7 +2,7 @@ import {createStore} from "vuex";
 
 export default createStore({
     state: {
-
+        createRecordDialog: false
     },
     actions: {
 
@@ -11,9 +11,8 @@ export default createStore({
 
     },
     getters: {
-
-    },
-    modules: {
-
+        createRecordDialog(state){
+            return state.createRecordDialog
+        }
     }
 })

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <prime-dialog  v-model:visible="display" :breakpoints="{'960px': '75vw', '640px': '100vw'}" :style="{width: '50vw'}" header="Добавить запись!" :modal="true">
+  <prime-dialog v-model:visible="display" :breakpoints="{'960px': '75vw', '640px': '100vw'}" :style="{width: '50vw'}" header="Добавить запись!" :modal="true">
     <template #header>
       <h3>Вы добавляете запись в журнал</h3>
     </template>
@@ -68,16 +68,13 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "CreateRecordDialog",
-  data() {
-    return {
-      display:true
-    }
-  },
-  methods: {
-    confirm(){
-      this.display = false;
+  computed: {
+    display() {
+      return this.$store.state.createRecordDialog
     }
   }
 }
