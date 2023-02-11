@@ -23,13 +23,10 @@
 
   export default {
     components: {RecordsTable, HeaderToolbar},
-    data() {
-      return {
-        EJournalText: 'Входящие Email',
+    computed:{
+      EJournalText(){
+        return this.$store.state.EJournalText
       }
-    },
-    methods: {
-      //simple change for commit/
     }
   }
 </script>
