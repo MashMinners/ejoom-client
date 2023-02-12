@@ -8,21 +8,24 @@
         <template #legend>
           {{ EJournalText }}
         </template>
+        <smart-search></smart-search>
         <records-table></records-table>
       </prime-fieldset>
     </div>
     <div id="app-footer"></div>
     <div id="app-modals">
-
+      <create-record-dialog></create-record-dialog>
     </div>
   </div>
 </template>
 <script>
   import HeaderToolbar from "@/components/HeaderToolbar.vue";
   import RecordsTable from "@/components/RecordsTable.vue";
+  import CreateRecordDialog from "@/components/Dialogs/CreateRecordDialog.vue";
+  import SmartSearch from "@/components/SmartSearch.vue";
 
   export default {
-    components: {RecordsTable, HeaderToolbar},
+    components: {CreateRecordDialog, RecordsTable, HeaderToolbar, SmartSearch},
     computed:{
       EJournalText(){
         return this.$store.state.EJournalText
