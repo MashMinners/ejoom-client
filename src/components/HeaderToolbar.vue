@@ -29,7 +29,8 @@ export default {
   //Работа с мутациями и экшенами
   methods: {
     ...mapMutations({
-      setEjournalText: "SET_EJOURNAL_TEXT"
+      setEjournalText: "SET_EJOURNAL_TEXT",
+      setEjournalType: "SET_EJOURNAL_TYPE"
     }),
     toggleButtons(btn){
       for(let k in this.buttons) {
@@ -39,18 +40,22 @@ export default {
     },
     incomingEmail(){
       this.setEjournalText('Входящие Email')
+      this.setEjournalType(1)
       this.toggleButtons('incomingEmailButton')
     },
     outgoingEmail(){
       this.setEjournalText('Исходящие Email')
+      this.setEjournalType(2)
       this.toggleButtons('outgoingEmailButton')
     },
     incomingLetters(){
       this.setEjournalText('Входящие (Бумага)')
+      this.setEjournalType(3)
       this.toggleButtons('incomingLettersButton')
     },
     outgoingLetters(){
       this.setEjournalText('Исходящие (Бумага)')
+      this.setEjournalType(4)
       this.toggleButtons('outgoingLettersButton')
     }
   }
