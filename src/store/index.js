@@ -12,6 +12,7 @@ export default createStore({
         currentDate: new Date().toISOString().slice(0, 10),
         //Диалоговые окна
         createRecordDialog: false,
+        createEmployeeDialog: false,
         //
         EJournalText: 'Входящие Email'
     }),
@@ -40,18 +41,32 @@ export default createStore({
             finally {
 
             }
+        },
+        async createEmployee({state, commit}, employee){
+            const stringified = (JSON.parse(JSON.stringify(employee)))
+            console.log(employee)
+            commit('HIDE_CREATE_EMPLOYEE_DIALOG')
         }
     },
     mutations: {
+        //API
         ['GET_RECORDS'](state, records){
             state.records = records
         },
+        //Диалоговые окна
         ['SHOW_CREATE_RECORD_DIALOG'](state){
             state.createRecordDialog = true
+        },
+        ['SHOW_CREATE_EMPLOYEE_DIALOG'](state){
+            state.createEmployeeDialog = true
         },
         ['HIDE_CREATE_RECORD_DIALOG'](state){
             state.createRecordDialog = false
         },
+        ['HIDE_CREATE_EMPLOYEE_DIALOG'](state){
+            state.createEmployeeDialog = false
+        },
+        //Текст
         ['SET_EJOURNAL_TEXT'](state, text){
             state.EJournalText = text
         },
@@ -70,8 +85,12 @@ export default createStore({
         currentDate(state){
             return state.currentDate
         },
+        //Диалоговые окна
         createRecordDialog(state){
             return state.createRecordDialog
+        },
+        createEmployeeDialog(state){
+            return state.createEmployeeDialog
         },
         EJournalText(state){
             return state.EJournalText

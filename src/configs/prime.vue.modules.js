@@ -12,13 +12,14 @@ import Textarea from 'primevue/textarea';
 import AutoComplete from "primevue/autocomplete";
 import Divider from "primevue/divider";
 import Message from 'primevue/message';
+import InputMask from 'primevue/inputmask';
 import ('primevue/resources/themes/tailwind-light/theme.css')
 import ('primevue/resources/primevue.min.css')
 import ('primeicons/primeicons.css')
 import ('primeflex/primeflex.css');
 export default {
   modules: [
-      InputText, Button, Toolbar, Fieldset, DataTable, Column, Dialog, InputNumber, Textarea, AutoComplete, Divider, Message
+      InputText, Button, Toolbar, Fieldset, DataTable, Column, Dialog, InputNumber, Textarea, AutoComplete, Divider,Message, InputMask
   ],
   directives: [
         {name: "tooltip", subject: Tooltip}

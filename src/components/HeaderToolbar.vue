@@ -7,12 +7,15 @@
         <prime-button :class="[buttons.incomingLettersButton ? 'p-button-danger' : 'p-button-primary']" label="Входящие (Бумага)" icon="pi pi-envelope" class="mr-2" @click="incomingLetters"/>
         <prime-button :class="[buttons.outgoingLettersButton ? 'p-button-danger' : 'p-button-primary']" label="Исходящие (Бумага)" icon="pi pi-envelope" class="mr-2" @click="outgoingLetters"/>
       </template>
+      <template #end>
+        <prime-button class="p-button-success mr-2" label="Добавить сотрудника" icon="pi pi-user" @click="showCreateEmployeeDialog"/>
+        <prime-button class="p-button-success mr-2" label="Добавить контрагента" icon="pi pi-users"/>
+      </template>
     </prime-toolbar>
   </div>
 </template>
 
 <script>
-import CreateRecordDialog from "@/components/Dialogs/CreateRecordDialog.vue";
 import {mapMutations} from "vuex";
 export default {
   name: "HeaderToolbar",
@@ -30,7 +33,8 @@ export default {
   methods: {
     ...mapMutations({
       setEjournalText: "SET_EJOURNAL_TEXT",
-      setEjournalType: "SET_EJOURNAL_TYPE"
+      setEjournalType: "SET_EJOURNAL_TYPE",
+      showCreateEmployeeDialog: "SHOW_CREATE_EMPLOYEE_DIALOG"
     }),
     toggleButtons(btn){
       for(let k in this.buttons) {

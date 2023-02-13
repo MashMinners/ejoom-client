@@ -15,6 +15,7 @@
     <div id="app-footer"></div>
     <div id="app-modals">
       <create-record-dialog></create-record-dialog>
+      <create-employee-dialog></create-employee-dialog>
     </div>
   </div>
 </template>
@@ -23,9 +24,10 @@
   import RecordsTable from "@/components/RecordsTable.vue";
   import CreateRecordDialog from "@/components/Dialogs/CreateRecordDialog.vue";
   import SmartSearch from "@/components/SmartSearch.vue";
+  import CreateEmployeeDialog from "@/components/Dialogs/CreateEmployeeDialog.vue";
 
   export default {
-    components: {CreateRecordDialog, RecordsTable, HeaderToolbar, SmartSearch},
+    components: {CreateEmployeeDialog, CreateRecordDialog, RecordsTable, HeaderToolbar, SmartSearch},
     computed:{
       EJournalText(){
         return this.$store.state.EJournalText
