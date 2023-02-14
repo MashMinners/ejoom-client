@@ -44,7 +44,7 @@ export default createStore({
         },
         async createEmployee({state, commit}, employee){
             const stringified = (JSON.parse(JSON.stringify(employee)))
-            console.log(employee)
+            console.log(stringified)
             commit('HIDE_CREATE_EMPLOYEE_DIALOG')
         }
     },
@@ -73,7 +73,6 @@ export default createStore({
         ['SET_EJOURNAL_TYPE'](state, id){
             state.correspondenceTypeId = id
         }
-
     },
     getters: {
         getCorrespondenceType(state){
