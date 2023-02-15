@@ -5,6 +5,7 @@ export default createStore({
     state: () => ({
         //Хранилище записей
         records: [],
+        employees: [],
         //Настройки поиска
         correspondenceTypeId: 1,
         searchType : "ByParams",
@@ -32,11 +33,26 @@ export default createStore({
                 //Бизнес логика
                 const response = await axios.get('http://192.168.0.10/?XDEBUG_SESSION_START=PHPSTORM', {params});
                 const records = response.data.results ? response.data.results : [] ;
-                console.log(records)
                 commit('GET_RECORDS', records)
             }
             catch (e) {
                 console.log(e)
+            }
+            finally {
+
+            }
+        },
+        async getEmployeesAction({state,commit}, payload){
+            try{
+                const params = {
+                    search: payload
+                }
+                const response = await axios.get('http://192.168.0.10/employees?XDEBUG_SESSION_START=PHPSTORM', {params});
+                const employees = response.data.employees ? response.data.employees : [] ;
+                commit('SET_EMPLOYEES', employees)
+            }
+            catch (e){
+
             }
             finally {
 
@@ -52,6 +68,12 @@ export default createStore({
         //API
         ['GET_RECORDS'](state, records){
             state.records = records
+        },
+        ['SET_EMPLOYEES'](state, employees){
+            employees.forEach((element) => {
+                element.employeeFullname = element.employeeSurname + ' ' + element.employeeFirstName + ' ' + element.employeeSecondName
+            })
+            state.employees = employees
         },
         //Диалоговые окна
         ['SHOW_CREATE_RECORD_DIALOG'](state){
@@ -80,6 +102,9 @@ export default createStore({
         },
         records(state){
             return state.records
+        },
+        employees(state){
+            return state.employees
         },
         currentDate(state){
             return state.currentDate

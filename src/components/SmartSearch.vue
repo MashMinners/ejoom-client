@@ -1,5 +1,8 @@
 <template>
   <div class="p-fluid grid">
+    <div class="field col-1">
+      <prime-button @click="showCreateRecordDialog">+</prime-button>
+    </div>
     <div class="field col-11">
          <span class="p-input-icon-left">
             <i class="pi pi-search" />
@@ -10,7 +13,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "Search",
@@ -31,9 +34,17 @@ export default {
     ...mapActions({
       search: 'getMails'
     }),
+    ...mapMutations({
+      showCreateRecordDialog: "SHOW_CREATE_RECORD_DIALOG"
+    }),
     getEmails(){
       this.search(this.searchParams)
     }
+  },
+  computed:{
+    ...mapGetters({
+      display: 'createRecordDialog'
+    })
   }
 }
 </script>
