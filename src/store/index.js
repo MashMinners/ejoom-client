@@ -58,6 +58,22 @@ export default createStore({
 
             }
         },
+        async getCounterpartiesAction({state,commit}, payload){
+            try{
+                const params = {
+                    search: payload
+                }
+                const response = await axios.get('http://192.168.0.10/counterparties?XDEBUG_SESSION_START=PHPSTORM', {params});
+                const counterparties = response.data.counterparties ? response.data.counterparties : [] ;
+                commit('SET_COUNTERPARTIES', counterparties)
+            }
+            catch (e){
+
+            }
+            finally {
+
+            }
+        },
         async createEmployee({state, commit}, employee){
             const stringified = (JSON.parse(JSON.stringify(employee)))
             console.log(stringified)
@@ -74,6 +90,12 @@ export default createStore({
                 element.employeeFullname = element.employeeSurname + ' ' + element.employeeFirstName + ' ' + element.employeeSecondName
             })
             state.employees = employees
+        },
+        ['SET_COUNTERPARTIES'](state, counterparties){
+            //employees.forEach((element) => {
+                //element.employeeFullname = element.employeeSurname + ' ' + element.employeeFirstName + ' ' + element.employeeSecondName
+            //})
+            state.counterparties = counterparties
         },
         //Диалоговые окна
         ['SHOW_CREATE_RECORD_DIALOG'](state){
@@ -105,6 +127,9 @@ export default createStore({
         },
         employees(state){
             return state.employees
+        },
+        counterparties(state){
+            return state.counterparties
         },
         currentDate(state){
             return state.currentDate

@@ -22,14 +22,22 @@
 
           <div class="field col-2">
           <span class="p-float-label">
-            <prime-auto-complete id="employee" v-model="employee" :suggestions="employees" @complete="getEmployees($event)" optionLabel="employeeFullname"></prime-auto-complete>
+            <prime-auto-complete id="employee" v-model="employee" loadingIcon="pi pi-compass" :delay="1000"
+                                 :suggestions="employees" @complete="getEmployees($event)"
+                                 optionLabel="employeeFullname">
+
+            </prime-auto-complete>
             <label for="employee">Сотрудник</label>
           </span>
           </div>
 
           <div class="field col-2">
           <span class="p-float-label">
-            <prime-auto-complete id="counterparty"></prime-auto-complete>
+           <prime-auto-complete id="counterparty" v-model="counterparty" loadingIcon="pi pi-compass" :delay="1000"
+                                :suggestions="counterparties" @complete="getCounterparties($event)"
+                                optionLabel="counterpartyName">
+
+            </prime-auto-complete>
             <label for="counterparty">Контрагент</label>
           </span>
           </div>
@@ -63,18 +71,27 @@ export default {
   name: "CreateRecordDialog",
   data(){
     return {
-      employee: ''
+      employee: '',
+      counterparty: ''
     }
   },
   methods: {
     ...mapActions({
-      getEmployeesAction: 'getEmployeesAction'
+      getEmployeesAction: 'getEmployeesAction',
+      getCounterpartiesAction: 'getCounterpartiesAction',
     }),
     ...mapMutations({
       hideDialog: "HIDE_CREATE_RECORD_DIALOG"
     }),
     getEmployees(event){
-      this.getEmployeesAction(event.query)
+      if(event.query.length > 3){
+        this.getEmployeesAction(event.query)
+      }
+    },
+    getCounterparties(event){
+      if(event.query.length > 3){
+        this.getCounterpartiesAction(event.query)
+      }
     },
     saveRecord(){
       console.log(this.employee)
@@ -87,7 +104,8 @@ export default {
     ...mapGetters({
       display: "createRecordDialog",
       date: "currentDate",
-      employees: "employees"
+      employees: "employees",
+      counterparties: "counterparties"
     })
   }
 }
