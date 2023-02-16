@@ -11,7 +11,7 @@
               <i class="pi pi-user"></i>
             </span>
             <span class="p-float-label">
-              <prime-input-text id="surname" :class="[form.surname]" type="text" v-model="employee.surname" />
+              <prime-input-text id="surname" :class="[form.surname]" type="text" v-model="employee.employeeSurname" />
               <label for="surname">Фамилия</label>
             </span>
           </div>
@@ -23,7 +23,7 @@
               <i class="pi pi-user"></i>
             </span>
             <span class="p-float-label">
-              <prime-input-text id="first-name" :class="[form.firstName]" type="text" v-model="employee.firstName" />
+              <prime-input-text id="first-name" :class="[form.firstName]" type="text" v-model="employee.employeeFirstName" />
               <label for="first-name">Имя</label>
             </span>
           </div>
@@ -35,7 +35,7 @@
               <i class="pi pi-user"></i>
             </span>
             <span class="p-float-label">
-              <prime-input-text id="second-name" :class="[form.secondName]" type="text" v-model="employee.secondName" />
+              <prime-input-text id="second-name" :class="[form.secondName]" type="text" v-model="employee.employeeSecondName" />
               <label for="second-name">Отчество</label>
             </span>
           </div>
@@ -70,6 +70,7 @@
       <prime-button icon="pi pi-times" class="p-button-danger p-button-sm" @click="close"/>
     </template>
   </prime-dialog>
+  <prime-toast position="top-left" group="tl"></prime-toast>
 </template>
 
 <script>
@@ -80,11 +81,11 @@ export default {
   data(){
     return {
       employee: {
-        surname: '',
-        firstName: '',
-        secondName: '',
-        phoneNumber: '',
-        email: ''
+        employeeSurname: '',
+        employeeFirstName: '',
+        employeeSecondName: '',
+        employeePhoneNumber: '',
+        employeeEmail: ''
       },
       form: {
         surname: '',
@@ -98,11 +99,11 @@ export default {
       create: "createEmployee"
     }),
     createEmployee(){
-      if(this.employee.surname.length === 0 || this.employee.firstName.length === 0 || this.employee.secondName.length === 0){
-        for (let k in [this.employee.surname, this.employee.firstName, this.employee.secondName]){
-          this.employee.surname === '' ? this.form.surname = 'p-invalid' : ''
-          this.employee.firstName === '' ? this.form.firstName = 'p-invalid' : ''
-          this.employee.secondName === '' ? this.form.secondName = 'p-invalid' : ''
+      if(this.employee.employeeSurname.length === 0 || this.employee.employeeFirstName.length === 0 || this.employee.employeeSecondName.length === 0){
+        for (let k in [this.employee.employeeSurname, this.employee.employeeFirstName, this.employee.employeeSecondName]){
+          this.employee.employeeSurname === '' ? this.form.surname = 'p-invalid' : ''
+          this.employee.employeeFirstName === '' ? this.form.firstName = 'p-invalid' : ''
+          this.employee.employeeSecondName === '' ? this.form.secondName = 'p-invalid' : ''
         }
       }
      else{

@@ -77,6 +77,7 @@ export default createStore({
         async createEmployee({state, commit}, employee){
             const stringified = (JSON.parse(JSON.stringify(employee)))
             console.log(stringified)
+            const response = await axios.post('http://192.168.0.10/employees?XDEBUG_SESSION_START=PHPSTORM', stringified)
             commit('HIDE_CREATE_EMPLOYEE_DIALOG')
         }
     },
