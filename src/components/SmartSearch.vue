@@ -1,7 +1,7 @@
 <template>
   <div class="p-fluid grid">
     <div class="field col-1">
-      <prime-button @click="showCreateRecordDialog">+</prime-button>
+      <prime-button class="p-button-success" icon="pi pi-plus" @click="showCreateRecordDialog">+</prime-button>
     </div>
     <div class="field col-11">
          <span class="p-input-icon-left">
@@ -20,13 +20,11 @@ export default {
   data(){
     return {
       searchParams: {
-        searchType : "ByParams",
-        correspondenceTypeId : 2,
         searchString : '',
-        startDate : "2023-01-28",
-        endDate : "2023-01-29",
-        employeeId : "7f93ce5e-9ef4-11ed-aec8-08002745bf63",
-        counterpartyId : "2417cd49-9ef4-11ed-aec8-08002745bf63"
+        startDate : '',
+        endDate : '',
+        employeeId : '',
+        counterpartyId : ''
       },
     }
   },

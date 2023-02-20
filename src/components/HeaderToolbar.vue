@@ -9,7 +9,7 @@
       </template>
       <template #end>
         <prime-button class="p-button-success mr-2" label="Добавить сотрудника" icon="pi pi-user" @click="showCreateEmployeeDialog"/>
-        <prime-button class="p-button-success mr-2" label="Добавить контрагента" icon="pi pi-users"/>
+        <prime-button class="p-button-success mr-2" label="Добавить контрагента" icon="pi pi-users" @click="showCreateCounterpartyDialog"/>
       </template>
     </prime-toolbar>
   </div>
@@ -34,7 +34,8 @@ export default {
     ...mapMutations({
       setEjournalText: "SET_EJOURNAL_TEXT",
       setEjournalType: "SET_EJOURNAL_TYPE",
-      showCreateEmployeeDialog: "SHOW_CREATE_EMPLOYEE_DIALOG"
+      showCreateEmployeeDialog: "SHOW_CREATE_EMPLOYEE_DIALOG",
+      showCreateCounterpartyDialog: "SHOW_CREATE_COUNTERPARTY_DIALOG"
     }),
     toggleButtons(btn){
       for(let k in this.buttons) {

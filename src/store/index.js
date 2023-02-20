@@ -14,6 +14,7 @@ export default createStore({
         //Диалоговые окна
         createRecordDialog: false,
         createEmployeeDialog: false,
+        createCounterpartyDialog: false,
         //
         EJournalText: 'Входящие Email'
     }),
@@ -22,16 +23,16 @@ export default createStore({
             try {
                 const stringified = (JSON.parse(JSON.stringify(payload)))
                 const params =  {
-                    "searchType" : state.searchType,
+                    "searchType" : state.searchType  ? state.searchType : null,
                     "correspondenceTypeId" : state.correspondenceTypeId,
-                    "searchString" : stringified.searchString,
-                    "startDate" : payload.startDate,
-                    "endDate" : payload.endDate,
-                    "employeeId" : payload.employeeId,
-                    "counterpartyId" : payload.counterpartyId
+                    "searchString" : stringified.searchString ? stringified.searchString : null,
+                    "startDate" : payload.startDate ? payload.startDate : state.currentDate,
+                    "endDate" : payload.endDate ? payload.endDate : null,
+                    "employeeId" : payload.employeeId ? payload.employeeId : null,
+                    "counterpartyId" : payload.counterpartyId ? payload.counterpartyId : null
                 }
                 //Бизнес логика
-                const response = await axios.get('http://192.168.0.10/?XDEBUG_SESSION_START=PHPSTORM', {params});
+                const response = await axios.get('http://192.168.0.10/records?XDEBUG_SESSION_START=PHPSTORM', {params});
                 const records = response.data.results ? response.data.results : [] ;
                 commit('GET_RECORDS', records)
             }
@@ -58,6 +59,11 @@ export default createStore({
 
             }
         },
+        async createEmployee({state, commit}, employee){
+            const stringified = (JSON.parse(JSON.stringify(employee)))
+            const response = await axios.post('http://192.168.0.10/employees?XDEBUG_SESSION_START=PHPSTORM', stringified)
+            commit('HIDE_CREATE_EMPLOYEE_DIALOG')
+        },
         async getCounterpartiesAction({state,commit}, payload){
             try{
                 const params = {
@@ -74,11 +80,25 @@ export default createStore({
 
             }
         },
-        async createEmployee({state, commit}, employee){
+        async createCounterpartyAction({state, commit}, employee){
             const stringified = (JSON.parse(JSON.stringify(employee)))
-            console.log(stringified)
-            const response = await axios.post('http://192.168.0.10/employees?XDEBUG_SESSION_START=PHPSTORM', stringified)
-            commit('HIDE_CREATE_EMPLOYEE_DIALOG')
+            const response = await axios.post('http://192.168.0.10/counterparties?XDEBUG_SESSION_START=PHPSTORM', stringified)
+            commit('HIDE_CREATE_COUNTERPARTY_DIALOG')
+        },
+        async addRecordAction({state, commit}, payload){
+            const stringified = (JSON.parse(JSON.stringify(payload)))
+            const record = {
+                letterNumber: stringified.record.letterNumber,
+                letterHeader: stringified.record.letterHeader,
+                additionally: stringified.record.additionally,
+                registrationDate: stringified.record.registrationDate,
+                employeeId: stringified.employee.employeeId,
+                counterpartyId: stringified.counterparty.counterpartyId,
+                correspondenceTypeId: state.correspondenceTypeId
+            }
+            const response = await axios.post('http://192.168.0.10/records?XDEBUG_SESSION_START=PHPSTORM', record)
+            console.log(response)
+            commit('HIDE_CREATE_RECORD_DIALOG')
         }
     },
     mutations: {
@@ -105,11 +125,17 @@ export default createStore({
         ['SHOW_CREATE_EMPLOYEE_DIALOG'](state){
             state.createEmployeeDialog = true
         },
+        ['SHOW_CREATE_COUNTERPARTY_DIALOG'](state){
+            state.createCounterpartyDialog = true
+        },
         ['HIDE_CREATE_RECORD_DIALOG'](state){
             state.createRecordDialog = false
         },
         ['HIDE_CREATE_EMPLOYEE_DIALOG'](state){
             state.createEmployeeDialog = false
+        },
+        ['HIDE_CREATE_COUNTERPARTY_DIALOG'](state){
+            state.createCounterpartyDialog = false
         },
         //Текст
         ['SET_EJOURNAL_TEXT'](state, text){
@@ -141,6 +167,9 @@ export default createStore({
         },
         createEmployeeDialog(state){
             return state.createEmployeeDialog
+        },
+        createCounterpartyDialog(state){
+            return state.createCounterpartyDialog
         },
         EJournalText(state){
             return state.EJournalText

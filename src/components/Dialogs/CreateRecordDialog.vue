@@ -8,14 +8,14 @@
         <div class="p-fluid grid">
           <div class="field col-1">
           <span class="p-float-label">
-            <prime-input-text id="letter-number" type="text" />
-            <label for="number">Номер</label>
+            <prime-input-text id="letter-number" v-model="record.letterNumber" type="text" />
+            <label for="letter-number">Номер</label>
           </span>
           </div>
 
           <div class="field col-3">
           <span class="p-float-label">
-            <prime-input-text id="letter-theme" type="text" />
+            <prime-input-text id="letter-theme" v-model="record.letterHeader" type="text" />
             <label for="letter-theme">Тема письма</label>
           </span>
           </div>
@@ -44,13 +44,13 @@
 
           <div class="field col-2">
           <span class="p-float-label">
-            <prime-input-text type="date" v-model="date" />
+            <prime-input-text type="date" v-model="record.registrationDate" />
           </span>
           </div>
 
           <div class="field col-2">
           <span class="p-float-label">
-            <prime-textarea id="additionally" type="text" />
+            <prime-textarea id="additionally" v-model="record.additionally" type="text" />
             <label for="additionally">Дополнительная информация</label>
           </span>
           </div>
@@ -72,13 +72,21 @@ export default {
   data(){
     return {
       employee: '',
-      counterparty: ''
+      counterparty: '',
+      record: {
+        letterNumber: '',
+        letterHeader: '',
+        additionally: '',
+        registrationDate: ''
+
+      }
     }
   },
   methods: {
     ...mapActions({
       getEmployeesAction: 'getEmployeesAction',
       getCounterpartiesAction: 'getCounterpartiesAction',
+      addRecordAction: 'addRecordAction'
     }),
     ...mapMutations({
       hideDialog: "HIDE_CREATE_RECORD_DIALOG"
@@ -94,7 +102,7 @@ export default {
       }
     },
     saveRecord(){
-      console.log(this.employee)
+      this.addRecordAction({'employee': this.employee, 'counterparty':this.counterparty, 'record': this.record})
     }
   },
   computed: {

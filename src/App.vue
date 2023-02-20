@@ -16,6 +16,7 @@
     <div id="app-modals">
       <create-record-dialog></create-record-dialog>
       <create-employee-dialog></create-employee-dialog>
+      <create-counterparty-dialog></create-counterparty-dialog>
     </div>
   </div>
 </template>
@@ -25,9 +26,12 @@
   import CreateRecordDialog from "@/components/Dialogs/CreateRecordDialog.vue";
   import SmartSearch from "@/components/SmartSearch.vue";
   import CreateEmployeeDialog from "@/components/Dialogs/CreateEmployeeDialog.vue";
+  import CreateCounterpartyDialog from "@/components/Dialogs/CreateCounterpartyDialog.vue";
 
   export default {
-    components: {CreateEmployeeDialog, CreateRecordDialog, RecordsTable, HeaderToolbar, SmartSearch},
+    components: {
+      CreateCounterpartyDialog,
+      CreateEmployeeDialog, CreateRecordDialog, RecordsTable, HeaderToolbar, SmartSearch},
     computed:{
       EJournalText(){
         return this.$store.state.EJournalText
