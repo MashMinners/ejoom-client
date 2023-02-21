@@ -75,46 +75,65 @@ export default {
       this.search(this.searchParams)
     },
     getEmailsByPeriod(period){
-      //let endDate = new Date();
-      //let startDate = new Date();
+      let endDate = new Date();
+      let startDate = new Date();
       switch (period){
         case 0 :
           this.toggleButtons('allButton');
-          this.setDates(0)
+          this.setDates({
+            startDate: '',
+            endDate: ''
+          });
           this.search(this.searchParams); break
         case 1 :
           this.toggleButtons('todayButton');
           //this.searchParams.startDate = startDate.toISOString().slice(0, 10);
           //this.searchParams.endDate = endDate.toISOString().slice(0, 10);
-          this.setDates(1);
+          this.setDates({
+            startDate: startDate.toISOString().slice(0, 10),
+            endDate: endDate.toISOString().slice(0, 10)
+          });
           this.search(this.searchParams); break
         case 2 :
           this.toggleButtons('yesterdayButton')
-          //startDate.setDate((startDate.getDate() - 1));
+          startDate.setDate((startDate.getDate() - 1));
           //this.searchParams.startDate = startDate.toISOString().slice(0, 10);
           //this.searchParams.endDate = endDate.toISOString().slice(0, 10);
-          this.setDates(2);
+          this.setDates({
+            startDate: startDate.toISOString().slice(0, 10),
+            endDate: endDate.toISOString().slice(0, 10)
+          });
           this.search(this.searchParams); break
         case 3 :
           this.toggleButtons('threeDaysButton')
-          //startDate.setDate((startDate.getDate() - 2));
+          startDate.setDate((startDate.getDate() - 2));
           //this.searchParams.startDate = startDate.toISOString().slice(0, 10);
           //this.searchParams.endDate = endDate.toISOString().slice(0, 10);
+          this.setDates({
+            startDate: startDate.toISOString().slice(0, 10),
+            endDate: endDate.toISOString().slice(0, 10)
+          });
           this.setDates(3);
           this.search(this.searchParams); break
         case 7 :
           this.toggleButtons('weekButton')
-          //startDate.setDate((startDate.getDate() - 7));
+          startDate.setDate((startDate.getDate() - 7));
           //this.searchParams.startDate = startDate.toISOString().slice(0, 10);
           //this.searchParams.endDate = endDate.toISOString().slice(0, 10);
-          this.setDates(7);
+          this.setDates({
+            startDate: startDate.toISOString().slice(0, 10),
+            endDate: endDate.toISOString().slice(0, 10)
+          });
           this.search(this.searchParams); break
         case 30 :
           this.toggleButtons('monthButton')
-          //startDate.setDate((startDate.getDate() - 30));
+          startDate.setDate((startDate.getDate() - 30));
           //this.searchParams.startDate = startDate.toISOString().slice(0, 10);
           //this.searchParams.endDate = endDate.toISOString().slice(0, 10);
-          this.setDates(30);
+          this.setDates({
+            startDate: startDate.toISOString().slice(0, 10),
+            endDate: endDate.toISOString().slice(0, 10)
+          });
           this.search(this.searchParams); break
       }
     }

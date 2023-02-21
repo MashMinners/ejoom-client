@@ -50,6 +50,7 @@ export default {
       this.setEjournalText('Исходящие Email')
       this.setEjournalType(2)
       this.toggleButtons('outgoingEmailButton')
+      this.search()
     },
     incomingLetters(){
       this.setEjournalText('Входящие (Бумага)')

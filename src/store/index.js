@@ -26,6 +26,7 @@ export default createStore({
         async getMails({state, commit}, payload){
             try {
                 //const stringified = (JSON.parse(JSON.stringify(payload)))
+                console.log(payload)
                 const params =  {
                     "searchType" : state.searchType  ? state.searchType : null,
                     "correspondenceTypeId" : state.correspondenceTypeId,
@@ -149,8 +150,10 @@ export default createStore({
             state.correspondenceTypeId = id
         },
         //Даты
-        ['SET_DATES'](state, period){
-            let endDate = new Date();
+        ['SET_DATES'](state, dates){
+            state.startDate = dates.startDate;
+            state.endDate = dates.endDate;
+            /*let endDate = new Date();
             let startDate = new Date();
             switch (period){
                 case 0 :
@@ -180,7 +183,7 @@ export default createStore({
                     startDate.setDate((startDate.getDate() - 30));
                     state.startDate = startDate.toISOString().slice(0, 10);
                     state.endDate = endDate.toISOString().slice(0, 10);
-            }
+            }*/
         }
     },
     getters: {
