@@ -3,6 +3,8 @@
     <prime-dialog v-model:visible="display"  :style="{width: '90vw'}" :modal="true" :closable="false">
       <template #header>
         <h4>Добавить запись в журнал</h4>
+        <prime-button class="p-button-success mr-2" label="Добавить сотрудника" icon="pi pi-user" @click="showCreateEmployeeDialog"/>
+        <prime-button class="p-button-success mr-2" label="Добавить контрагента" icon="pi pi-users" @click="showCreateCounterpartyDialog"/>
       </template>
       <div class="card">
         <div class="p-fluid grid">
@@ -22,7 +24,7 @@
 
           <div class="field col-2">
           <span class="p-float-label">
-            <prime-auto-complete id="employee" v-model="employee" loadingIcon="pi pi-compass" :delay="1000"
+            <prime-auto-complete id="employee" v-model="employee" loadingIcon="pi pi-compass" :delay="500"
                                  :suggestions="employees" @complete="getEmployees($event)"
                                  optionLabel="employeeFullname">
 
@@ -33,7 +35,7 @@
 
           <div class="field col-2">
           <span class="p-float-label">
-           <prime-auto-complete id="counterparty" v-model="counterparty" loadingIcon="pi pi-compass" :delay="1000"
+           <prime-auto-complete id="counterparty" v-model="counterparty" loadingIcon="pi pi-compass" :delay="500"
                                 :suggestions="counterparties" @complete="getCounterparties($event)"
                                 optionLabel="counterpartyName">
 
@@ -89,7 +91,9 @@ export default {
       addRecordAction: 'addRecordAction'
     }),
     ...mapMutations({
-      hideDialog: "HIDE_CREATE_RECORD_DIALOG"
+      hideDialog: "HIDE_CREATE_RECORD_DIALOG",
+      showCreateEmployeeDialog: "SHOW_CREATE_EMPLOYEE_DIALOG",
+      showCreateCounterpartyDialog: "SHOW_CREATE_COUNTERPARTY_DIALOG"
     }),
     getEmployees(event){
       if(event.query.length > 3){
@@ -97,12 +101,21 @@ export default {
       }
     },
     getCounterparties(event){
-      if(event.query.length > 3){
+      if(event.query.length >= 3){
         this.getCounterpartiesAction(event.query)
       }
     },
     saveRecord(){
       this.addRecordAction({'employee': this.employee, 'counterparty':this.counterparty, 'record': this.record})
+      this.clearForm();
+    },
+    clearForm(){
+      //this.employee = '';
+      this.counterparty = '';
+      this.record.letterNumber = '';
+      this.record.letterHeader = '';
+      this.record.additionally = '';
+      //this.record.registrationDate = '';
     }
   },
   computed: {

@@ -7,16 +7,12 @@
         <prime-button :class="[buttons.incomingLettersButton ? 'p-button-danger' : 'p-button-primary']" label="Входящие (Бумага)" icon="pi pi-envelope" class="mr-2" @click="incomingLetters"/>
         <prime-button :class="[buttons.outgoingLettersButton ? 'p-button-danger' : 'p-button-primary']" label="Исходящие (Бумага)" icon="pi pi-envelope" class="mr-2" @click="outgoingLetters"/>
       </template>
-      <template #end>
-        <prime-button class="p-button-success mr-2" label="Добавить сотрудника" icon="pi pi-user" @click="showCreateEmployeeDialog"/>
-        <prime-button class="p-button-success mr-2" label="Добавить контрагента" icon="pi pi-users" @click="showCreateCounterpartyDialog"/>
-      </template>
     </prime-toolbar>
   </div>
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapActions, mapMutations} from "vuex";
 export default {
   name: "HeaderToolbar",
   data() {
@@ -31,11 +27,12 @@ export default {
   },
   //Работа с мутациями и экшенами
   methods: {
+    ...mapActions({
+      search: 'getMails'
+    }),
     ...mapMutations({
       setEjournalText: "SET_EJOURNAL_TEXT",
       setEjournalType: "SET_EJOURNAL_TYPE",
-      showCreateEmployeeDialog: "SHOW_CREATE_EMPLOYEE_DIALOG",
-      showCreateCounterpartyDialog: "SHOW_CREATE_COUNTERPARTY_DIALOG"
     }),
     toggleButtons(btn){
       for(let k in this.buttons) {
@@ -47,6 +44,7 @@ export default {
       this.setEjournalText('Входящие Email')
       this.setEjournalType(1)
       this.toggleButtons('incomingEmailButton')
+      this.search()
     },
     outgoingEmail(){
       this.setEjournalText('Исходящие Email')

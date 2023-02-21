@@ -3,6 +3,7 @@
     <prime-data-table editMode="cell" class="editable-cells-table p-datatable-sm"  :value="records"
                         removableSort
                         stripedRows
+                        showGridlines
                         responsiveLayout="scroll"
                         :paginator="true" :rows="10"
                         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
@@ -11,8 +12,12 @@
       <prime-column style="width:10%" field="letterNumber" header="Номер письма" :sortable="true"></prime-column>
       <prime-column field="letterHeader" header="Тема"></prime-column>
       <prime-column field="employeeSurname" header="Сотрудник"></prime-column>
-      <prime-column field="counterparty" header="Контрагент"></prime-column>
-      <prime-column field="registrationDate" header="Дата" :sortable="true"></prime-column>
+      <prime-column field="counterpartyName" header="Контрагент"></prime-column>
+      <prime-column field="registrationDate" header="Дата" :sortable="true">
+        <template #body="slotProps">
+          {{formatDate(slotProps.data)}}
+        </template>
+      </prime-column>
       <prime-column header="Действия">
         <template #body="slotProps">
           <prime-button class="p-button-danger p-button-sm mr-2" icon="pi pi-delete-left" v-tooltip.top="'Удалить запись'"
@@ -40,6 +45,13 @@ export default {
     ...mapMutations({
       showDialog: "SHOW_CREATE_RECORD_DIALOG",
     }),
+    formatDate(value) {
+      return new Date(value.registrationDate).toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    },
     confirmDeleteProduct(record) {
       console.log(record)
     }

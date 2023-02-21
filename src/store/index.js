@@ -9,7 +9,11 @@ export default createStore({
         //Настройки поиска
         correspondenceTypeId: 1,
         searchType : "ByParams",
-        //Текущее время
+        startDate: '',
+        endDate: '',
+        employeeId: '',
+        counterpartyId: '',
+        //Даты и время
         currentDate: new Date().toISOString().slice(0, 10),
         //Диалоговые окна
         createRecordDialog: false,
@@ -21,15 +25,15 @@ export default createStore({
     actions: {
         async getMails({state, commit}, payload){
             try {
-                const stringified = (JSON.parse(JSON.stringify(payload)))
+                //const stringified = (JSON.parse(JSON.stringify(payload)))
                 const params =  {
                     "searchType" : state.searchType  ? state.searchType : null,
                     "correspondenceTypeId" : state.correspondenceTypeId,
-                    "searchString" : stringified.searchString ? stringified.searchString : null,
-                    "startDate" : payload.startDate ? payload.startDate : state.currentDate,
-                    "endDate" : payload.endDate ? payload.endDate : null,
-                    "employeeId" : payload.employeeId ? payload.employeeId : null,
-                    "counterpartyId" : payload.counterpartyId ? payload.counterpartyId : null
+                    "searchString" : payload.searchString ? payload.searchString : null,//stringified.searchString ? stringified.searchString : null,
+                    "startDate" : state.startDate ? state.startDate : null, //payload.startDate ? payload.startDate : null,//state.currentDate,
+                    "endDate" : state.endDate ? state.endDate : null, //payload.endDate ? payload.endDate : null,
+                    "employeeId" : state.employeeId ? state.employeeId : null,
+                    "counterpartyId" : state.counterpartyId ? state.counterpartyId : null
                 }
                 //Бизнес логика
                 const response = await axios.get('http://192.168.0.10/records?XDEBUG_SESSION_START=PHPSTORM', {params});
@@ -98,7 +102,7 @@ export default createStore({
             }
             const response = await axios.post('http://192.168.0.10/records?XDEBUG_SESSION_START=PHPSTORM', record)
             console.log(response)
-            commit('HIDE_CREATE_RECORD_DIALOG')
+            //commit('HIDE_CREATE_RECORD_DIALOG')
         }
     },
     mutations: {
@@ -143,6 +147,40 @@ export default createStore({
         },
         ['SET_EJOURNAL_TYPE'](state, id){
             state.correspondenceTypeId = id
+        },
+        //Даты
+        ['SET_DATES'](state, period){
+            let endDate = new Date();
+            let startDate = new Date();
+            switch (period){
+                case 0 :
+                    state.startDate = ''
+                    state.endDate = ''
+                    break;
+                case 1 :
+                    state.startDate = startDate.toISOString().slice(0, 10);
+                    state.endDate = endDate.toISOString().slice(0, 10);
+                    break;
+                case 2 :
+                    startDate.setDate((startDate.getDate() - 1));
+                    state.startDate = startDate.toISOString().slice(0, 10);
+                    state.endDate = endDate.toISOString().slice(0, 10);
+                    break;
+                case 3 :
+                    startDate.setDate((startDate.getDate() - 2));
+                    state.startDate = startDate.toISOString().slice(0, 10);
+                    state.endDate = endDate.toISOString().slice(0, 10);
+                    break;
+                case 7 :
+                    startDate.setDate((startDate.getDate() - 7));
+                    state.startDate = startDate.toISOString().slice(0, 10);
+                    state.endDate = endDate.toISOString().slice(0, 10);
+                    break;
+                case 30 :
+                    startDate.setDate((startDate.getDate() - 30));
+                    state.startDate = startDate.toISOString().slice(0, 10);
+                    state.endDate = endDate.toISOString().slice(0, 10);
+            }
         }
     },
     getters: {
